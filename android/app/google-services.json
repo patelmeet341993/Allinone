@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "240326302171",
+    "project_id": "allinonecalc-3d590",
+    "storage_bucket": "allinonecalc-3d590.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:240326302171:android:0cd82df697f82012aeaffe",
+        "android_client_info": {
+          "package_name": "com.sportiwe.allinonecalc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "240326302171-a4a0fcgsn3h54k8esb12jf6uutm7ikbn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sportiwe.allinonecalc",
+            "certificate_hash": "00a023f69f18f8aa2288b806602d0f6bf7201dd3"
+          }
+        },
+        {
+          "client_id": "240326302171-iagr153iesdk05399gq10vekbugm0rip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJL1ZNGz97GraT-EVevsUrolEhDPcb9Ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "240326302171-iagr153iesdk05399gq10vekbugm0rip.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "240326302171-b0dgbcbh5jrneke82739c6p0usbobqot.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sportiwe.allinonecalc",
+                "app_store_id": "1661462772"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

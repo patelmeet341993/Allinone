@@ -2,9 +2,13 @@ import 'package:allinonecalc/calculators/Bmi_Page.dart';
 import 'package:allinonecalc/calculators/age_calc.dart';
 import 'package:allinonecalc/calculators/emicalculator.dart';
 import 'package:allinonecalc/calculators/gst_cal.dart';
+import 'package:allinonecalc/mysecrets/chatscreen.dart';
 import 'package:allinonecalc/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'mysecrets/loginscreen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,25 +18,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    user = FirebaseAuth.instance.currentUser;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+        child: Scaffold(
       body: mainBody(),
-    //  backgroundColor: Styles.mainColor,
+      //  backgroundColor: Styles.mainColor,
     ));
   }
 
-  Widget mainBody(){
+  Widget mainBody() {
     return Container(
-
       width: double.maxFinite,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset("assets/logo.png",height: 300,),
-          Expanded(child: Container(
+          Image.asset(
+            "assets/logo.png",
+            height: 300,
+          ),
+          Expanded(
+              child: Container(
             padding: EdgeInsets.all(15),
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               color: Styles.mainColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(25),
@@ -44,32 +60,44 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: Column(
                     children: [
-                      button("assets/bmi.png","BMI calculator",(){
-                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>Bmi_Page()));
-
-
+                      button("assets/bmi.png", "BMI calculator", () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => Bmi_Page()));
                       }),
-                      button("assets/gst.png","GST Calculator",(){
-                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>GstCalc()));
+                      button("assets/gst.png", "GST Calculator", () {
+                        if (user == null)
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => LoginScreen()));
+                        else
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) => ChatScreen(user: user!,)));
 
+                        // Navigator.push(context, CupertinoPageRoute(builder: (context)=>GstCalc()));
                       }),
                     ],
                   ),
                 ),
-                
                 Expanded(
                   child: Column(
                     children: [
-                      button("assets/emi.png","EMI calculator",(){
-
+                      button("assets/emi.png", "EMI calculator", () {
                         print("call");
-                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>EmiCalculator()));
-
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => EmiCalculator()));
                       }),
-
-                      button("assets/cal.png","Age calculator",(){
-
-                        Navigator.push(context, CupertinoPageRoute(builder: (context)=>AgeCalc()));
+                      button("assets/cal.png", "Age calculator", () {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => AgeCalc()));
                       }),
                     ],
                   ),
@@ -82,10 +110,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget button(String icon,String str,Function callback){
+  Widget button(String icon, String str, Function callback) {
     return Expanded(
       child: InkWell(
-        onTap: ()=>callback(),
+        onTap: () => callback(),
         child: Container(
           margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -97,7 +125,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(icon,height: 50,),
+                Image.asset(
+                  icon,
+                  height: 50,
+                ),
                 Text(str),
               ],
             ),
